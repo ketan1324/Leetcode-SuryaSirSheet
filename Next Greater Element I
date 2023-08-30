@@ -1,0 +1,45 @@
+class Solution {
+public:
+    vector<int> nextGreaterElement(vector<int>& nums1, vector<int>& nums2) {
+          vector<int> ans;
+          stack<int> st;
+          vector<int> v;
+          int n2 = nums2.size();
+          int n1 = nums1.size();
+          for(int i=n2-1 ; i>=0;i--){
+                if(st.empty()){
+                    st.push(i);v.push_back(-1);continue;
+                }   
+                while(!st.empty() && nums2[st.top()]<nums2[i])
+                        st.pop();
+
+                if(st.empty()) {
+                    v.push_back(-1);st.push(i);
+                }
+                else{
+                    v.push_back(nums2[st.top()]);st.push(i);
+                }
+            }
+            reverse(v.begin(),v.end());
+           
+            
+            int temp ;
+            int f1=0;
+            for(int i = 0 ;i <n1;i++){
+                 f1 = nums1[i];//nums1 element
+                
+                for(int j=0;j<n2;j++){
+                   
+                    if(f1==nums2[j]){
+                        
+                         temp = v[j];
+                        ans.push_back(temp);
+                        
+                    }
+                    
+                }
+                
+            }
+            return ans;
+    }
+};
