@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int minOperations(vector<string>& logs) {
+     int ans =0;
+     stack<int> st;
+     string c;
+     int add=1;
+     int n = logs.size();
+     for(int i =0;i<n;i++)
+     {
+         
+        c=logs[i];
+        if(c=="./"){
+            continue;
+        }
+        else if(c=="../"){
+            if(!st.empty()){
+                st.pop();
+            }
+            
+        }
+        else{
+            st.push(add);
+        }
+     }   
+     return st.size();
+
+    }
+};
