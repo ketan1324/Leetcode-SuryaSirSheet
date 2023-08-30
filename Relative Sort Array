@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
+        int n = arr2.size();
+        
+        map<int,int> umap;
+        for(int i = 0 ;i<arr1.size();i++)
+        {
+            umap[arr1[i]]++;
+        }
+        vector<int> ans;
+        for(auto const &temp:arr2)
+        {
+            auto x = umap.find(temp);
+            int count = x->second;
+            vector<int> v(count,temp);
+            ans.insert(ans.end(),v.begin(),v.end());
+            umap.erase(temp);
+            
+        }
+        for(auto x : umap)
+        {
+            int ele = x.first;
+            int count  = x.second;
+             vector<int> v(count,ele);
+              ans.insert(ans.end(),v.begin(),v.end());
+        }
+        return ans;
+        
+    }
+};
