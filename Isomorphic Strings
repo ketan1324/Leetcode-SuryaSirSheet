@@ -1,0 +1,16 @@
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        char testS[128] = {NULL}, testT[128] = {NULL};
+        for(int i = 0; i<s.length(); i++){
+            if(testS[s[i]] == NULL && testT[t[i]] == NULL){
+                testS[s[i]] = t[i];
+                testT[t[i]] = s[i];
+            }
+            else if(testS[s[i]] != t[i] || testT[t[i]] != s[i]){
+                return false;
+            }
+        }
+            return true;
+    }
+};
