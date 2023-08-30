@@ -1,0 +1,34 @@
+class NumArray {
+    vector<int> sums;
+public:
+    NumArray(vector<int>& nums) {
+        
+        if(nums.size() == 0)return;
+        
+        sums.resize(nums.size());
+        
+        sums[0] = nums[0];        
+        for (int i = 1; i < nums.size();i++){
+            sums[i] = sums[i-1] + nums[i];
+        }
+    }
+    
+    void update(int i, int val) {
+        int prev_val = 0;
+        if( i == 0){
+            prev_val = sums[0];
+        }else{
+            prev_val = sums[i] - sums[i-1];
+        }
+        
+        for (int j = i ; j < sums.size();j++){
+            sums[j] = sums[j] - prev_val + val; 
+        }
+    }
+    
+    int sumRange(int i, int j) {
+        
+        if(i==0)return sums[j];        
+        return (sums[j] - sums[i-1]);
+    }
+};
