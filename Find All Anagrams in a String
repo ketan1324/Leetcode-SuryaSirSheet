@@ -1,0 +1,56 @@
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        //brute force 
+       /* vector<int> ans;
+        if(p.size()>s.size())return ans;
+        
+        sort(p.begin(),p.end());
+        for(int i=0;i<=s.size()-p.size();i++)
+        {
+            string t;
+            for(int j=i;j<i+p.size();j++)
+            {
+                t+=s[j];
+            }
+            sort(t.begin(),t.end());
+            if(t==p)ans.push_back(i);
+        }
+        return ans;*/
+
+        //min algorithm
+
+        vector<int> ans;
+        unordered_map<char,int> mp;
+        //for(auto &x:p)
+        for(int i=0;i<p.size();i++)
+        {
+            mp[p[i]]++;
+        }
+        int i=0,j=0,count=mp.size(),k=p.size();
+        while(j<s.size())
+        {
+            if(mp.find(s[j])!=mp.end()){
+                mp[s[j]]--;
+                if(mp[s[j]]==0){
+                    count--;
+                }
+            }
+            //
+            if(j-i+1<k)j++;//making of window 
+            else if(j-i+1==k)
+            {
+                if(count==0)ans.push_back(i);
+                if(mp.find(s[i])!=mp.end()){
+                    mp[s[i]]++;
+                    if(mp[s[i]]==1)count++;
+                }
+                i++;
+                j++;
+            }
+        }
+        return ans;
+
+    }
+
+};
